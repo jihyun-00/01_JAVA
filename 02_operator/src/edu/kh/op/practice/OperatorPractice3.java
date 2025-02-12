@@ -14,7 +14,7 @@ public class OperatorPractice3 {
 		System.out.print("멤버십 있으세요?(있으면 true / 없으면 false 입력) : ");
 		String member = sc.nextLine();
 		
-		double result = member=="false" ? (price*0.90) : (price*0.95);
+		double result = member.equals("true") ? (price*0.90) : (price*0.95);
 		System.out.printf("할인을 포함한 최종 금액 : %.1f원", result);
 		
 	}
