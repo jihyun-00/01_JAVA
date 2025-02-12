@@ -1,6 +1,7 @@
 package edu.kh.basic;
 
 //git Test 집에서 코드 변경해봄
+//학원에서 공부함 수정함
 
 //class : 자바 코드가 작성되는 영역
 public class JavaTest {
