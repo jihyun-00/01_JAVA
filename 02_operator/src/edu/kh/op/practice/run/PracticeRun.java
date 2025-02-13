@@ -11,7 +11,7 @@ public class PracticeRun {
 		OperatorPractice op = new OperatorPractice();
 		OperatorPractice2 op2 = new OperatorPractice2();
 		OperatorPractice3 op3 = new OperatorPractice3();
-		op3.practice1();
+		op3.practice2();
 		
 	}
 

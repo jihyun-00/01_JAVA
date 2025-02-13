@@ -12,9 +12,9 @@ public class OperatorPractice3 {
 		sc.nextLine();
 		
 		System.out.print("멤버십 있으세요?(있으면 true / 없으면 false 입력) : ");
-		String member = sc.nextLine();
+		boolean member = sc.nextBoolean();
 		
-		double result = member.equals("true") ? (price*0.90) : (price*0.95);
+		double result = member ? (price*0.90) : (price*0.95);
 		System.out.printf("할인을 포함한 최종 금액 : %.1f원", result);
 		
 	}
@@ -25,8 +25,19 @@ public class OperatorPractice3 {
 		System.out.print("가격을 입력하세요 : ");
 		int priceatm = sc.nextInt();
 		
-		System.out.printf("50000원 : %d\n10000원 : %d\n5000원 : %d\n1000원 : %d\n", 
-				priceatm/50000, priceatm%50000/10000, priceatm%50000%10000/5000, priceatm%50000%10000%5000/1000);
+		int fifth = priceatm / 50000;
+		priceatm %=50000;
+		
+		int tenth = priceatm / 10000;
+		priceatm %=10000;
+		
+		int fiveth = priceatm / 5000;
+		priceatm %=5000;
+		
+		int oneth = priceatm / 1000;
+		//priceatm %=1000;
+		
+		System.out.printf("50000원 : %d\n10000원 : %d\n5000원 : %d\n1000원 : %d\n", fifth, tenth, fiveth, oneth);
 		
 		
 	}
