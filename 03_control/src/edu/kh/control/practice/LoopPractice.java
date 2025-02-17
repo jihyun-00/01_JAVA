@@ -94,7 +94,7 @@ public class LoopPractice {
 		System.out.print("숫자 : ");
 		int num = sc.nextInt();
 
-		if (num < 2 && num > 9) {
+		if (num < 2 || num > 9) {
 			System.out.println("2~9 사이 숫자만 입력해주세요.");
 		} else {
 
@@ -117,6 +117,7 @@ public class LoopPractice {
 			}
 			System.out.println();
 		}
+		
 	}
 
 	public void practice08() {
