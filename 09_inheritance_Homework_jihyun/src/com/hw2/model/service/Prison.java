@@ -5,55 +5,54 @@ import com.hw2.model.dto.Prisoner;
 
 public class Prison implements ManagementSystem{
 	
+	private Prisoner[] prisoners; // 수감자 객체 배열
 	private int prisonerCount;
-	private Prisoner[] prisoners = new Prisoner[prisonerCount];
-	
+
 	public Prison(int size) {
+		prisoners = new Prisoner[size];
+		prisonerCount = 0;
 	}
-	
-	public Prison(int prisonerCount, Prisoner[] prisoners) {
-		super();
-		this.prisonerCount = prisonerCount;
-		this.prisoners = prisoners;
-	}
-	
+
 	@Override
 	public void addPerson(Person person) {
-		
+		if (person instanceof Prisoner && prisonerCount < prisoners.length) {
+			prisoners[prisonerCount++] = (Prisoner) person; // 다운캐스팅
+			System.out.println("수감자가 추가되었습니다 - " + person.getInfo());
+		} else {
+			System.out.println("인원이 모두 충원되어 더 이상 추가 못함");
+		}
+
 	}
-	
+
 	@Override
 	public void removePerson(String id) {
-		
+		for (int i = 0; i < prisonerCount; i++) {
+
+			if (prisoners[i].getId().equals(id)) {
+				System.out.println("수감자가 삭제되었습니다 - " + prisoners[i].getInfo());
+				prisoners[i] = null;
+
+				for (int j = i; j < prisonerCount - 1; j++) {
+					prisoners[j] = prisoners[j + 1];
+				}
+
+				prisoners[--prisonerCount] = null;
+				return;
+			}
+
+		}
+
+		System.out.println("ID : " + id + "인 수감자를 찾을 수 없습니다.");
+
 	}
-	
+
 	@Override
 	public void displayAllPerson() {
-		
-	}
+		System.out.println("전체 수감자 명단 : ");
+		for (int i = 0; i < prisonerCount; i++) {
+			System.out.println(prisoners[i].getInfo());
+		}
 
-
-
-	public int getPrisonerCount() {
-		return prisonerCount;
-	}
-
-
-
-	public void setPrisonerCount(int prisonerCount) {
-		this.prisonerCount = prisonerCount;
-	}
-
-
-
-	public Prisoner[] getPrisoners() {
-		return prisoners;
-	}
-
-
-
-	public void setPrisoners(Prisoner[] prisoners) {
-		this.prisoners = prisoners;
 	}
 	
 	
