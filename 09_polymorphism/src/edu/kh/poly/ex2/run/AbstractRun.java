@@ -7,7 +7,7 @@ public class AbstractRun {
 
 	public static void main(String[] args) {
 
-		//new AbstractService().ex1();
+//		new AbstractService().ex1();
 		
 		//================================
 		

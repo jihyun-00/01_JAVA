@@ -1,5 +1,8 @@
 package com.toyFactory.model.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Toy {
 	
 	private String Name;
@@ -9,17 +12,40 @@ public class Toy {
 	private String year;
 	private String material;
 	
-	public Toy() {}
+	private Set<String> set;
+	
+	public Toy() {
+		Set<String> set = new HashSet<>();
+	}
 
-	public Toy(String name, int price, String color, int age, String year, String material) {
+	public Toy(String name, int price, String color, int age, String year) {
 		super();
 		Name = name;
 		this.price = price;
 		this.color = color;
 		this.age = age;
 		this.year = year;
-		this.material = material;
 	}
+	
+	public Toy(String name, int price, String color, int age, String year, Set<String> materialset) {
+		this(name, price,color, age, year);
+		
+		set = materialset;
+	}
+	
+
+	public Toy(String name, int price, String color, int age, String year, String ...strings) {
+		
+		this(name, price, color, age, year);
+		
+		set = new HashSet<String>();
+		
+		for(String s : strings) {
+			set.add(s);
+		}
+	}
+	
+	
 
 	public String getName() {
 		return Name;
@@ -68,11 +94,25 @@ public class Toy {
 	public void setMaterial(String material) {
 		this.material = material;
 	}
+	
+	public String getMaterialString() {
+		StringBuilder sb = new StringBuilder();
+		for(String m : set) {
+			sb.append(m).append(", ");
+		}
+		
+		sb.setLength(sb.length()-2);
+		return sb.toString();
+			
+		
+	}
 
 	@Override
 	public String toString() {
-		return String.format("이름 : %s / 가격 : %d / 색상 : %s / 사용가능연령 : %d / 제조년월일 : %s / 재료 : %s",
-				Name, price, color, age, year, material);
+		return String.format("이름 : %s / 가격 : %d / 색상 : %s / 사용가능연령 : %d / 제조년월일 : %s / 재료 : %s", 
+				Name, price, color, age, year, getMaterialString());
+		
+			
 	}
 	
 	

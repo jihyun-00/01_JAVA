@@ -159,60 +159,76 @@ public class BranchExample {
 	}
 	
 	public void game2() {
-
-		System.out.println("[가위바위보 게임]");
-		System.out.print("몇 판? : ");
+		System.out.println("[가위바위보 게임~!");
+		System.out.print("몇 판? ");
 		int round = sc.nextInt();
+		sc.nextLine();
 		
-		int win = 0;
-		int draw = 0;
-		int lose = 0;
-
-		for (int i = 1; i <= round; i++) {
-			System.out.println();
+		int win=0;
+		int draw=0;
+		int lose=0;
+		
+		for(int i=1; i<=round; i++) {
+			int computer = (int)(Math.random()*3+1);
+			
+			 System.out.println();
 			System.out.println(i + "번째 게임");
 			System.out.print("가위/바위/보 중 하나 입력 : ");
-			String input = sc.next();
-
-			String com = null;
-
-			int random = (int) (Math.random() * 3 + 1);
-
-			switch (random) {
-			case 1:
-				com = "가위";
-				break;
-			case 2:
-				com = "바위";
-				break;
-			case 3:
-				com = "보";
-				break;
+			String answer = sc.nextLine();
+			
+			
+			if(computer==1) {
+				System.out.println("컴퓨터는 [가위]를 선택했습니다.");
+			} else if(computer==2) {
+				System.out.println("컴퓨터는 [바위]를 선택했습니다.");
+			} else if(computer==3) {
+				System.out.println("컴퓨터는 [보]를 선택했습니다.");
 			}
 			
-			System.out.printf("컴퓨터는 [%s]를 선택했습니다.\n", com);
-
-			if (input.equals(com)) {
-				System.out.println("비겼습니다.");
-			} else {
-				if (input.equals("가위") && input.equals("보")) {
-					System.out.println("이겼습니다.");
-					win++;
-				}
-				if (input.equals("바위") && input.equals("가위")) {
-					System.out.println("이겼습니다.");
-					win++;
-				}
-				if (input.equals("보") && input.equals("바위")) {
-					System.out.println("이겼습니다.");
-					win++;
-				} else {
-					System.out.println("졌습니다.");
-					lose++;
-				}
+			// 이긴 경우
+			if(answer.equals("가위") && computer==3) {
+				System.out.println("이겼습니다.");
+				win++;
 			}
-
-			System.out.printf("현재 기록 : %d승 %d무 %d패\n", win, draw, lose);
+			if(answer.equals("바위") && computer==1) {
+				System.out.println("이겼습니다.");
+				win++;
+			}
+			if(answer.equals("보") && computer==2) {
+				System.out.println("이겼습니다.");
+				win++;
+			}
+			//비긴 경우
+			if(answer.equals("가위") && computer==1) {
+				System.out.println("비겼습니다.");
+				draw++;
+			}
+			if(answer.equals("바위") && computer==2) {
+				System.out.println("비겼습니다.");
+				draw++;
+			}
+			if(answer.equals("보") && computer==3) {
+				System.out.println("비겼습니다.");
+				draw++;
+			}
+			//진 겨우
+			if(answer.equals("가위") && computer==2) {
+				System.out.println("졌습니다.");
+				lose++;
+			}
+			if(answer.equals("바위") && computer==3) {
+				System.out.println("졌습니다.");
+				lose++;
+			}
+			if(answer.equals("보") && computer==1) {
+				System.out.println("졌습니다.");
+				lose++;
+			}
+			
+			System.out.println("현재 기록 : " + win + "승" + draw + "무" + lose + "패");
 		}
 	}
+	
+
+		
 }

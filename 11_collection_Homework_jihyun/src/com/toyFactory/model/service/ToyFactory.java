@@ -18,26 +18,29 @@ public class ToyFactory {
 		private Scanner sc = new Scanner(System.in); //값을 입력받기 위한 Scanner 객체 생성
 		
 		
-		private List<Toy> factory = new ArrayList<Toy>();
-		Set<String> set = new HashSet<>();
 		private Map<Integer, String> map = new HashMap<Integer, String>();
 		// 부모타입  참조변수 = 자식객체의 주소 (다형성 중 업캐스팅)
+		
+		Set<Toy> toyset;
 
 
 		private Object year;
 		
 		public ToyFactory() {
 			
+			toyset = new HashSet<>();
+			
+			
 			map.put(1, "면직물");
 			map.put(2, "플라스틱");
 			map.put(3, "유리");
 			map.put(4, "고무");
 			
-			factory.add(new Toy("키시미시", 15000, "분홍색", 5, "19940505", "면직물, 플라스틱"));
-			factory.add(new Toy("캣냅", 27000, "보라색", 8, "19960128", "면직물, 플라스틱"));
-			factory.add(new Toy("파피", 57000, "빨간색", 12, "19931225", "고무, 면직물, 플라스틱"));
-			factory.add(new Toy("허기워기", 12000, "파란색", 5, "19940312", "면직물, 플라스틱"));
-			factory.add(new Toy("마미롱레그", 36000, "분홍색", 8, "19950805", "고무, 면직물"));
+			toyset.add(new Toy("키시미시", 15000, "분홍색", 5, "19940505", "면직물", "플라스틱"));
+			toyset.add(new Toy("캣냅", 27000, "보라색", 8, "19960128", "면직물", "플라스틱"));
+			toyset.add(new Toy("파피", 57000, "빨간색", 12, "19931225", "고무", "면직물", "플라스틱"));
+			toyset.add(new Toy("허기워기", 12000, "파란색", 5, "19940312", "면직물", "플라스틱"));
+			toyset.add(new Toy("마미롱레그", 36000, "분홍색", 8, "19950805", "고무", "면직물"));
 			
 		}
 		
@@ -65,19 +68,19 @@ public class ToyFactory {
 					menuNum = sc.nextInt(); //원하는 번호 int형으로 받기
 					System.out.println();
 					
-					switch(menuNum) { //munuNum 번호에 따라 그에 맞는 메서드를 수행하기 위해 switch문 사용
-					case 1 : showToyList(factory); break; //1. 도서등록 선택시 addBook() 메서드 실행
-					case 2 : System.out.println(addToy());break; //2. 도서조회 선택시 showBookList(library); 메서드 실행
+					switch(menuNum) {
+					case 1 : showToySet(); break; 
+					case 2 : System.out.println(addToy());break;
 					
-					case 3 : System.out.println(deleteToy()); break; //3. 도서수정 선택 시 editBook() 메서드 실행 
+					case 3 : System.out.println(deleteToy()); break;
 					
-					case 4 : showByYear(); break; //4. 도서삭제 선택 시 deleteBook() 메서드 실행
+					case 4 : showByYear(); break; 
 					
-					case 5 : showByAge(factory); break; //5. 즐겨찾기 추가 선택 시 addFavorite() 메서드 실행
+					case 5 : showByAge(); break;
 					
-					case 6 : addMaterial(); break; //6. 즐겨찾기 삭제 선택 시 deleteFavorite() 메서드 실행
+					case 6 : addMaterial(); break;
 					
-					case 7 : deleteMaterial();; break; //7. 즐겨찾기 조회 선택 시 showBookList(favList) 메서드 실행
+					case 7 : deleteMaterial();; break;
 
 					case 0 : System.out.println("종료되었습니다."); break; //0. 프로그램 종료 선택 시 프로그램 종료 후 해당 문구 출력
 					default : System.out.println("메뉴에 있는 번호만 입력하세요!"); break; //0~8번 외의 다른 문구 입력 시 해당 문구 출력
@@ -98,18 +101,19 @@ public class ToyFactory {
 		 * 
 		 * 
 		 */
-		public void showToyList(List<Toy> list) { //list 보여주는 메서드
+		public void showToySet() {
 			
-			if(list.isEmpty()) { //list가(도서 목록이) 비어있다면
+			if(toyset.isEmpty()) { 
 				System.out.println("장난감이 없습니다. 장난감을 만들어주세요!"); //해당 문구 출력
 			} else { //비어있지 않다면
 				
 				System.out.println("<전체 장난감 목록>");
 				
-				// list를 순회하면서 각 Book 객체를 출력
-				for(Toy temp : list) {
-					int index = factory.indexOf(temp);
-					System.out.println((index+1) + "." + temp);
+				
+				int num=1;
+				
+				for(Toy temp : toyset) {
+					System.out.println(temp);
 				}
 				
 			}
@@ -120,6 +124,8 @@ public class ToyFactory {
 		 * 
 		 */
 		public String addToy() {
+			
+			Set<String> mat = new HashSet<>();
 			
 			System.out.println("<새로운 장난감 추가>");
 			
@@ -148,17 +154,14 @@ public class ToyFactory {
 				if (material.equals("q")) {
 					break;
 				} else {
-					set.add(material);
+					mat.add(material);
 					continue;
 				}
 			}
+			toyset.add(new Toy(name, price, color, age, year, mat));
 			
 			
-			//Toy newToy = new Toy(name, price, color, age,year, set<>); //입력받은 도서 정보들 담기
-			
-			//factory.add(newToy);  
-			
-			return "등록 완료"; //String형이므로 String으로 반환
+			return "등록 완료";
 			
 		}
 		
@@ -170,23 +173,21 @@ public class ToyFactory {
 		public String deleteToy() {
 			System.out.println("<장난감 삭제>");
 			
-			showToyList(factory);
+			showToySet();
 			System.out.println();
 			System.out.print("삭제할 장난감의 이름을 입력하세요 : ");
 			String delete = sc.next();
 			
-			for(Toy temp : factory) { //library 리스트 순회
+			for(Toy temp : toyset) {
 				
 				if(temp.getName().equals(delete)) { //순회할 때 입력한 삭제 도서 번호와 순회중인 리스트 도서번호가 일치하다면
-					int index = factory.indexOf(temp);
-					// int List.indexOf(Object) : List에 일치하는 객체가 있으면 그 객체가 있는 index번호 반환
 					
 					System.out.print("정말 삭제하시겠습니까? (Y/N) : ");
 					
 					char answer = sc.next().toUpperCase().charAt(0); // "y" -> "Y" -> 'Y'
 					
 					if(answer == 'Y') { //Y라면
-						factory.remove(index); //library list의 해당 인덱스 삭제
+						toyset.remove(temp); 
 						break; //빠져나가기
 					} else { //아니라면
 						return "삭제를 진행하지 않습니다"; //해당 문구 반환
@@ -206,9 +207,8 @@ public class ToyFactory {
 
 			Set<String> year = new TreeSet<>();
 
-			for(String temp : set) {
-				int index = factory.indexOf(temp);
-				year.add(factory.get(index).getYear());
+			for(Toy temp : toyset) {
+				year.add(temp.getYear());
 			}
 			
 			
@@ -220,9 +220,9 @@ public class ToyFactory {
 		 * 
 		 */
 
-		public void showByAge(List<Toy> list) { //list 보여주는 메서드
+		public void showByAge() {
 			
-			if(list.isEmpty()) { //list가(도서 목록이) 비어있다면
+			if(toyset.isEmpty()) {
 				System.out.println("장난감이 없습니다. 장난감을 만들어주세요!"); //해당 문구 출력
 			} else { //비어있지 않다면
 				
@@ -230,20 +230,20 @@ public class ToyFactory {
 				
 				
 				System.out.println("[연령 : 5세]");
-				for(Toy temp : factory) {
+				for(Toy temp : toyset) {
 					if(temp.getAge()==5) {
 						System.out.println(temp);
 						
 					}
 				}
 				System.out.println("[연령 : 8세]");
-				for(Toy temp : factory) {
+				for(Toy temp : toyset) {
 					if(temp.getAge()==8) {
 						System.out.println(temp);
 					}
 				}
 				System.out.println("[연령 : 12세]");
-				for (Toy temp : factory) {
+				for (Toy temp : toyset) {
 					if (temp.getAge() == 12) {
 						System.out.println(temp);
 					}
