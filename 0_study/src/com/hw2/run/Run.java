@@ -1,7 +1,7 @@
 package com.hw2.run;
 
-import com.hw2.model.dto.Employee;
 import com.hw2.model.dto.Prisoner;
+import com.hw2.model.service.Company;
 
 public class Run {
 
@@ -9,13 +9,13 @@ public class Run {
 
 		//Company의 생성자를 이용하여 10칸짜리 Employee 객체배열 생성하는 Company 객체를 생성하여
 		// ManagementSystem 자료형의 company에 주소 저장
-		Employee[] employees = new Employee[10];
+		Company c = new Company(10);
 		
 		
 		
 		//Prison의 생성자를 이용하여 10칸짜리 Prisoner 객체배열 생성하는 Prison 객체를 생성하여
 		//ManagementSystem 자료형의 Prison에 주소 저장
-		Prisoner[] prisoners = new Prisoner[10];
+		
 		
 		//2명 정도 직원 새로 등록
 		//등록된 전체 직원 조회

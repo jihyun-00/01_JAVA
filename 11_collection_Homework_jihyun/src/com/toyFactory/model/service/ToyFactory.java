@@ -205,10 +205,10 @@ public class ToyFactory {
 		public void showByYear() {
 			
 
-			Set<String> year = new TreeSet<>();
+			Set<Toy> year = new TreeSet<>();
 
 			for(Toy temp : toyset) {
-				year.add(temp.getYear());
+				year.add(temp);
 			}
 			
 			
