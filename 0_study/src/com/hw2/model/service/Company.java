@@ -18,6 +18,7 @@ public class Company implements ManagementSystem {
 	
 	public void addPerson(Person person) {
 		employees[employeeCount] = (Employee)person;
+		employeeCount++;
 		
 	};
 	
