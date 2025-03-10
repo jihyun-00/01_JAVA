@@ -90,7 +90,7 @@ public Toy(String name, int price, String color, int age, String year, Set<Strin
 		}
 		
 		for(String s : material) {
-			sb.append(material).append(", ");
+			sb.append(s).append(", ");
 		}
 		
 		sb.setLength(sb.length()-2);
