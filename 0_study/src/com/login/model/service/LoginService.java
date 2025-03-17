@@ -38,7 +38,7 @@ public class LoginService {
 		menuNum =sc.nextInt();
 		
 		switch(menuNum) {
-		case 1 :  addMember(); break;
+		case 1 : addMember(); break;
 		case 2 : logIn(); break;
 		case 3 : viewMember(); break;
 		case 4 : editMember(); break;
